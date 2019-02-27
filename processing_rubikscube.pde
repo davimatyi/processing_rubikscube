@@ -60,8 +60,7 @@ void draw(){
     rotateY(rotationY);
   }
   
-  pushMatrix();
-  
+  /*pushMatrix(); 
   translate(-100, -150, 100);
   for(int i = 0; i<3; i++){
     for(int j = 0; j<3; j++){
@@ -134,7 +133,24 @@ void draw(){
     }
     translate(-300,100,0);
   }
-  popMatrix();
+  popMatrix();*/
+  
+  for(int side = 0; side < sides.length; side++){
+    pushMatrix();
+      settingRotation(side);
+      translate(-100,-100,-150);
+      for(int row = 0; row < sides[side].length; row++){
+        for(int col = 0; col < sides[side][row].length; col++){
+          fill(unhex(sides[side][row][col]));
+          rect(0,0,100,100);
+          translate(100,0,0);
+        }
+        translate(-300,100,0);
+      }
+    popMatrix();
+  }
+  
+  
   popMatrix();
 }
 
@@ -185,4 +201,15 @@ void mousePressed(){
 void mouseReleased(){
   prx = rotationX;
   pry = rotationY;
+}
+
+void settingRotation(int side){
+  switch(side){
+    case 0: rotateX(-PI/2); break;
+    case 1: rotateY(PI); break;
+    case 2: rotateY(-PI/2); break;
+    case 3:  break;
+    case 4: rotateY(PI/2); break;
+    case 5: rotateX(PI/2); break;
+  }
 }
