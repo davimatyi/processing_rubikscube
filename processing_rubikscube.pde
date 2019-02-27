@@ -10,9 +10,9 @@ String[][][] sides = {                                  //[oldal][sor][oszlop]
     {"ff00ff00","ff00ff00","ff00ff00"}
   },
   {                                                     //right
-    {"ffff0000","ffff00ff","ffff0000"},
     {"ffff0000","ffff0000","ffff0000"},
-    {"ffff0000","ffff0000","ffff5500"},
+    {"ffff0000","ffff0000","ffff0000"},
+    {"ffff0000","ffff0000","ffff0000"},
   },
   {                                                     //back
     {"ff0000ff","ff0000ff","ff0000ff"},
@@ -165,14 +165,54 @@ void rr(){
   sides[2][1][0] = sides[2][2][1];
   sides[2][2][1] = sides[2][1][2];
   sides[2][1][2] = s;
+  s = sides[0][0][2];
+  sides[0][0][2] = sides[3][0][2];
+  sides[3][0][2] = sides[5][0][2];
+  sides[5][0][2] = sides[1][2][0];
+  sides[1][2][0] = s;
+  s = sides[0][1][2];
+  sides[0][1][2] = sides[3][1][2];
+  sides[3][1][2] = sides[5][1][2];
+  sides[5][1][2] = sides[1][1][0];
+  sides[1][1][0] = s;
+  s = sides[0][2][2];
+  sides[0][2][2] = sides[3][2][2];
+  sides[3][2][2] = sides[5][2][2];
+  sides[5][2][2] = sides[1][0][0];
+  sides[1][0][0] = s;
   
+  
+}
+void rt(){
+  String s = sides[0][2][1];
+  sides[0][2][1] = sides[0][1][2];
+  sides[0][1][2] = sides[0][0][1];
+  sides[0][0][1] = sides[0][1][0];
+  sides[0][1][0] = s;
+  s = sides[0][2][2];
+  sides[0][2][2] = sides[0][0][2];
+  sides[0][0][2] = sides[0][0][0];
+  sides[0][0][0] = sides[0][2][0];
+  sides[0][2][0] = s;
+  s = sides[1][0][1];
+  sides[1][0][1] = sides[4][0][1];
+  sides[4][0][1] = sides[3][0][1];
+  sides[3][0][1] = sides[2][0][1];
+  sides[2][0][1] = s;
+  s = sides[1][0][2];
+  sides[1][0][2] = sides[4][0][2];
+  sides[4][0][2] = sides[3][0][2];
+  sides[3][0][2] = sides[2][0][2];
+  sides[2][0][2] = s;
+  s = sides[1][0][0];
+  sides[1][0][0] = sides[4][0][0];
+  sides[4][0][0] = sides[3][0][0];
+  sides[3][0][0] = sides[2][0][0];
+  sides[2][0][0] = s;
   
   
 }
 void rl(){
-  
-}
-void rt(){
   
 }
 void rx(){
@@ -188,8 +228,11 @@ void rb(){
 
 void keyPressed(){
   if(key == CODED){
-    if(keyCode == UP){
+    if(keyCode == RIGHT){
       rr();
+    }
+    if(keyCode == UP){
+      rt();
     }
   }
 }
