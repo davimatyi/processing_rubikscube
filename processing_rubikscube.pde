@@ -1,35 +1,5 @@
-String[][][] sides = {                                  //[oldal][sor][oszlop]
-  {                                                     //top
-    {"ffffffff","ffffffff","ffffffff"},
-    {"ffffffff","ffffffff","ffffffff"},
-    {"ffffffff","ffffffff","ffffffff"}
-  }, 
-  {                                                     //front
-    {"ff00ff00","ff00ff00","ff00ff00"},
-    {"ff00ff00","ff00ff00","ff00ff00"},
-    {"ff00ff00","ff00ff00","ff00ff00"}
-  },
-  {                                                     //right
-    {"ffff0000","ffff0000","ffff0000"},
-    {"ffff0000","ffff0000","ffff0000"},
-    {"ffff0000","ffff0000","ffff0000"},
-  },
-  {                                                     //back
-    {"ff0000ff","ff0000ff","ff0000ff"},
-    {"ff0000ff","ff0000ff","ff0000ff"},
-    {"ff0000ff","ff0000ff","ff0000ff"}
-  },
-  {                                                     //left
-    {"ffffa500","ffffa500","ffffa500"},
-    {"ffffa500","ffffa500","ffffa500"},
-    {"ffffa500","ffffa500","ffffa500"}
-  },
-  {                                                     //bottom
-    {"ffffff00","ffffff00","ffffff00"},
-    {"ffffff00","ffffff00","ffffff00"},
-    {"ffffff00","ffffff00","ffffff00"}
-  }
-};
+String[][][] sides = new String[6][3][3];
+String[] colors = {"ffffffff", "ff00ff00", "ffff0000", "ff0000ff", "ffffa500", "ffffff00"};
 
 float rotationX = 0, rotationY = 0;
 float prx = 0, pry = 0;
@@ -38,9 +8,10 @@ float mx = 0, my = 0;
 void setup(){
   size(1280, 720, P3D);
   stroke(0);
-  fill(unhex(sides[0][0][0]));
   rectMode(CENTER);
-  textSize(20);
+  textSize(40);
+  
+  resetCube();
   
 }
 
@@ -86,6 +57,7 @@ void draw(){
         translate(0,0,-50);
         fill(255);
         rect(0,0,100,100);
+        fill(0);
         printText(i);
       popMatrix();
     }
@@ -197,11 +169,21 @@ void settingRotation(int side){
 
 void printText(int side){
   switch(side){
-    case 0: text("T",0,0);
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 5:
+    case 0: rotateZ(PI); translate(-10,5,-1); text("U",0,0); break;
+    case 1: rotateY(PI); translate(-10,5,1); text("F",0,0); break;
+    case 2: rotateY(PI); translate(-10,5,1); text("R",0,0); break;
+    case 3: rotateY(PI); translate(-10,5,1); text("B",0,0); break;
+    case 4: rotateY(PI); translate(-10,5,1); text("L",0,0); break;
+    case 5: translate(-10,15,-1); text("D",0,0); break;
+  }
+}
+
+void resetCube(){
+  for(int side = 0; side < sides.length; side++){
+    for(int row = 0; row < sides[side].length; row++){
+      for(int col = 0; col < sides[side][row].length; col++){
+        sides[side][row][col] = colors[side];
+      }
+    }
   }
 }
