@@ -40,8 +40,7 @@ void setup(){
   stroke(0);
   fill(unhex(sides[0][0][0]));
   rectMode(CENTER);
-  rotateX(PI/2);
-  translate(width/2,height/2, 0);
+  textSize(20);
   
 }
 
@@ -76,7 +75,20 @@ void draw(){
     popMatrix();
   }
   
-  
+  popMatrix();
+  pushMatrix();
+    translate(10, 10, -400);
+    rotateX(rotationX);
+    rotateY(rotationY);
+    for(int i = 0; i < 6; i++){
+      pushMatrix();
+        settingRotation(i);
+        translate(0,0,-50);
+        fill(255);
+        rect(0,0,100,100);
+        printText(i);
+      popMatrix();
+    }
   popMatrix();
 }
 
@@ -180,5 +192,16 @@ void settingRotation(int side){
     case 3:  break;
     case 4: rotateY(PI/2); break;
     case 5: rotateX(PI/2); break;
+  }
+}
+
+void printText(int side){
+  switch(side){
+    case 0: text("T",0,0);
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
   }
 }
