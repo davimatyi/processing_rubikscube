@@ -1,9 +1,15 @@
+import static java.awt.event.KeyEvent.*;
+
 String[][][] sides = new String[6][3][3];
 String[] colors = {"ffffffff", "ff00ff00", "ffff0000", "ff0000ff", "ffffa500", "ffffff00"};
 //                     top        front       right       back        left        bottom
 float rotationX = 0, rotationY = 0;
 float prx = 0, pry = 0;
 float mx = 0, my = 0;
+int shuffleStepsLeft = 0;
+int shuffleTimer = 0;
+
+int random(int a, int b){return (int)(Math.random()*(b-a+1)+a);}
 
 
 //----------------------------------------------------------------------------------------------
@@ -19,6 +25,20 @@ void setup(){
 }
 //-----------------------------------------------------------------------------------------------
 void draw(){
+  
+  if(shuffleStepsLeft > 0 && shuffleTimer % 5 == 0){
+    shuffleStepsLeft--;
+    switch(random(1,6)){
+      case 1: ru();
+      case 2: rf();
+      case 3: rr();
+      case 4: rb();
+      case 5: rl();
+      case 6: rd();
+    }
+  }
+  if(shuffleTimer > 0) shuffleTimer--;
+  
   pushMatrix();
   translate(width/2, height/2, -200);
   background(0);
@@ -145,13 +165,18 @@ void rb(){
 
 void keyPressed(){
   if(key == CODED){
-    if(keyCode == RIGHT){
-      rr();
+    if(keyCode == VK_F1){
+      resetCube();
     }
-    if(keyCode == UP){
-      ru();
+    if(keyCode == VK_F2){
+      shuffleCube();
     }
   }
+  if(key == '0') shuffleCube();
+  if(key == '1') resetCube();
+  if(key == 'u') ru();
+  if(key == 'r') rr();
+    
 }
 
 void mousePressed(){
@@ -195,4 +220,9 @@ void resetCube(){
       }
     }
   }
+}
+
+void shuffleCube(){
+  shuffleStepsLeft = random(20,50);
+  shuffleTimer = shuffleStepsLeft * 5;
 }
