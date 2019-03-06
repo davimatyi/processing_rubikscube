@@ -145,20 +145,116 @@ void ru(){
   sides[2][0][0] = s;
 }
 //--------------------------------------------
+void rf(){
+  String s = sides[1][0][1];
+  sides[1][0][1] = sides[1][1][0];
+  sides[1][1][0] = sides[1][2][1];
+  sides[1][2][1] = sides[1][1][2];
+  sides[1][1][2] = s;
+  s = sides[1][0][0];
+  sides[1][0][0] = sides[1][2][0];
+  sides[1][2][0] = sides[1][2][2];
+  sides[1][2][2] = sides[1][0][2];
+  sides[1][0][2] = s;
+  s = sides[0][0][1];
+  sides[0][0][1] = sides[2][1][2];
+  sides[2][1][2] = sides[5][2][1];
+  sides[5][2][1] = sides[4][1][0];
+  sides[4][1][0] = s;
+  s = sides[0][0][2];
+  sides[0][0][2] = sides[2][2][2];
+  sides[2][2][2] = sides[5][2][0];
+  sides[5][2][0] = sides[4][0][0];
+  sides[4][0][0] = s;
+  s = sides[0][0][0];
+  sides[0][0][0] = sides[2][0][2];
+  sides[2][0][2] = sides[5][2][2];
+  sides[5][2][2] = sides[4][2][0];
+  sides[4][2][0] = s;
+}
+//--------------------------------------------
 void rl(){
-  
+  String s = sides[4][0][1];
+  sides[4][0][1] = sides[4][1][0];
+  sides[4][1][0] = sides[4][2][1];
+  sides[4][2][1] = sides[4][1][2];
+  sides[4][1][2] = s;
+  s = sides[4][0][0];
+  sides[4][0][0] = sides[4][2][0];
+  sides[4][2][0] = sides[4][2][2];
+  sides[4][2][2] = sides[4][0][2];
+  sides[4][0][2] = s;
+  s = sides[0][1][0];
+  sides[0][1][0] = sides[1][1][2];
+  sides[1][1][2] = sides[5][1][0];
+  sides[5][1][0] = sides[3][1][0];
+  sides[3][1][0] = s;
+  s = sides[0][0][0];
+  sides[0][0][0] = sides[1][2][2];
+  sides[1][2][2] = sides[5][0][0];
+  sides[5][0][0] = sides[3][0][0];
+  sides[3][0][0] = s;
+  s = sides[0][2][0];
+  sides[0][2][0] = sides[1][0][2];
+  sides[1][0][2] = sides[5][2][0];
+  sides[5][2][0] = sides[3][2][0];
+  sides[3][2][0] = s;
 }
 //--------------------------------------------
 void rd(){
-  
-}
-//--------------------------------------------
-void rf(){
-  
+  String s = sides[5][2][1];
+  sides[5][2][1] = sides[5][1][2];
+  sides[5][1][2] = sides[5][0][1];
+  sides[5][0][1] = sides[5][1][0];
+  sides[5][1][0] = s;
+  s = sides[5][2][2];
+  sides[5][2][2] = sides[5][0][2];
+  sides[5][0][2] = sides[5][0][0];
+  sides[5][0][0] = sides[5][2][0];
+  sides[5][2][0] = s;
+  s = sides[1][2][0];
+  sides[1][2][0] = sides[2][2][0];
+  sides[2][2][0] = sides[3][2][0];
+  sides[3][2][0] = sides[4][2][0];
+  sides[4][2][0] = s;
+  s = sides[1][2][1];
+  sides[1][2][1] = sides[2][2][1];
+  sides[2][2][1] = sides[3][2][1];
+  sides[3][2][1] = sides[4][2][1];
+  sides[4][2][1] = s;
+  s = sides[1][2][2];
+  sides[1][2][2] = sides[2][2][2];
+  sides[2][2][2] = sides[3][2][2];
+  sides[3][2][2] = sides[4][2][2];
+  sides[4][2][2] = s;
 }
 //--------------------------------------------
 void rb(){
-  
+  String s = sides[3][0][1];
+  sides[3][0][1] = sides[3][1][2];
+  sides[3][1][2] = sides[3][2][1];
+  sides[3][2][1] = sides[3][1][0];
+  sides[3][1][0] = s;
+  s = sides[3][0][0];
+  sides[3][0][0] = sides[3][0][2];
+  sides[3][0][2] = sides[3][2][2];
+  sides[3][2][2] = sides[3][2][0];
+  sides[3][2][0] = s;
+  s = sides[0][2][1];
+  sides[0][2][1] = sides[2][1][0];
+  sides[2][1][0] = sides[5][0][1];
+  sides[5][0][1] = sides[4][1][2];
+  sides[4][1][2] = s;
+  s = sides[0][2][0];
+  sides[0][2][0] = sides[2][0][0];
+  sides[2][0][0] = sides[5][0][2];
+  sides[5][0][2] = sides[4][2][2];
+  sides[4][2][2] = s;
+  s = sides[0][2][2];
+  sides[0][2][2] = sides[2][2][0];
+  sides[2][2][0] = sides[5][0][0];
+  sides[5][0][0] = sides[4][0][2];
+  sides[4][0][2] = s;
 }
 //--------------------------------------------------------------------------------------------
 
@@ -176,7 +272,17 @@ void keyPressed(){
   if(key == '1') resetCube();
   if(key == 'u') ru();
   if(key == 'r') rr();
-    
+  if(key == 'f') rf();
+  if(key == 'l') rl();
+  if(key == 'd') rd();
+  if(key == 'b') rb();
+  
+  if(key == 'U') {ru();ru();ru();}
+  if(key == 'R') {rr();rr();rr();}
+  if(key == 'F') {rf();rf();rf();}
+  if(key == 'L') {rl();rl();rl();}
+  if(key == 'D') {rd();rd();rd();}
+  if(key == 'B') {rb();rb();rb();}
 }
 
 void mousePressed(){
@@ -208,7 +314,7 @@ void printText(int side){
     case 2: rotateY(PI); translate(-10,5,1); text("R",0,0); break;
     case 3: rotateY(PI); translate(-10,5,1); text("B",0,0); break;
     case 4: rotateY(PI); translate(-10,5,1); text("L",0,0); break;
-    case 5: translate(-10,15,-1); text("D",0,0); break;
+    case 5: translate(-10,15,-1); rotateX(PI); text("D",0,25); break;
   }
 }
 
