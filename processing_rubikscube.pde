@@ -87,6 +87,85 @@ void draw(){
   popMatrix();
 }
 
+
+//--------------------------------------------------------------------------------------------
+
+
+void keyPressed(){
+  if(key == CODED){
+    if(keyCode == VK_F1){
+      resetCube();
+    }
+    if(keyCode == VK_F2){
+      shuffleCube();
+    }
+  }
+  if(key == '0') shuffleCube();
+  if(key == '1') resetCube();
+  if(key == 'u') ru();
+  if(key == 'r') rr();
+  if(key == 'f') rf();
+  if(key == 'l') rl();
+  if(key == 'd') rd();
+  if(key == 'b') rb();
+  
+  if(key == 'U') {ru();ru();ru();}
+  if(key == 'R') {rr();rr();rr();}
+  if(key == 'F') {rf();rf();rf();}
+  if(key == 'L') {rl();rl();rl();}
+  if(key == 'D') {rd();rd();rd();}
+  if(key == 'B') {rb();rb();rb();}
+}
+
+void mousePressed(){
+  mx = mouseX;
+  my = mouseY;
+}
+void mouseReleased(){
+  prx = rotationX;
+  pry = rotationY;
+}
+
+//--------------------------------------------------------------------------------------------------------
+
+void settingRotation(int side){
+  switch(side){
+    case 0: rotateX(-PI/2); break;
+    case 1: rotateY(PI); break;
+    case 2: rotateY(-PI/2); break;
+    case 3:  break;
+    case 4: rotateY(PI/2); break;
+    case 5: rotateX(PI/2); break;
+  }
+}
+
+void printText(int side){
+  switch(side){
+    case 0: rotateZ(PI); translate(-10,5,-1); text("U",0,0); break;
+    case 1: rotateY(PI); translate(-10,5,1); text("F",0,0); break;
+    case 2: rotateY(PI); translate(-10,5,1); text("R",0,0); break;
+    case 3: rotateY(PI); translate(-10,5,1); text("B",0,0); break;
+    case 4: rotateY(PI); translate(-10,5,1); text("L",0,0); break;
+    case 5: translate(-10,15,-1); rotateX(PI); text("D",0,25); break;
+  }
+}
+
+void resetCube(){
+  for(int side = 0; side < sides.length; side++){
+    for(int row = 0; row < sides[side].length; row++){
+      for(int col = 0; col < sides[side][row].length; col++){
+        sides[side][row][col] = colors[side];
+      }
+    }
+  }
+}
+
+void shuffleCube(){
+  shuffleStepsLeft = random(20,50);
+  shuffleTimer = shuffleStepsLeft * 5;
+}
+
+
 //---------------------------------------------------------------------------------------------------
 
 void rr(){
@@ -255,80 +334,4 @@ void rb(){
   sides[2][2][0] = sides[5][0][0];
   sides[5][0][0] = sides[4][0][2];
   sides[4][0][2] = s;
-}
-//--------------------------------------------------------------------------------------------
-
-
-void keyPressed(){
-  if(key == CODED){
-    if(keyCode == VK_F1){
-      resetCube();
-    }
-    if(keyCode == VK_F2){
-      shuffleCube();
-    }
-  }
-  if(key == '0') shuffleCube();
-  if(key == '1') resetCube();
-  if(key == 'u') ru();
-  if(key == 'r') rr();
-  if(key == 'f') rf();
-  if(key == 'l') rl();
-  if(key == 'd') rd();
-  if(key == 'b') rb();
-  
-  if(key == 'U') {ru();ru();ru();}
-  if(key == 'R') {rr();rr();rr();}
-  if(key == 'F') {rf();rf();rf();}
-  if(key == 'L') {rl();rl();rl();}
-  if(key == 'D') {rd();rd();rd();}
-  if(key == 'B') {rb();rb();rb();}
-}
-
-void mousePressed(){
-  mx = mouseX;
-  my = mouseY;
-}
-void mouseReleased(){
-  prx = rotationX;
-  pry = rotationY;
-}
-
-//--------------------------------------------------------------------------------------------------------
-
-void settingRotation(int side){
-  switch(side){
-    case 0: rotateX(-PI/2); break;
-    case 1: rotateY(PI); break;
-    case 2: rotateY(-PI/2); break;
-    case 3:  break;
-    case 4: rotateY(PI/2); break;
-    case 5: rotateX(PI/2); break;
-  }
-}
-
-void printText(int side){
-  switch(side){
-    case 0: rotateZ(PI); translate(-10,5,-1); text("U",0,0); break;
-    case 1: rotateY(PI); translate(-10,5,1); text("F",0,0); break;
-    case 2: rotateY(PI); translate(-10,5,1); text("R",0,0); break;
-    case 3: rotateY(PI); translate(-10,5,1); text("B",0,0); break;
-    case 4: rotateY(PI); translate(-10,5,1); text("L",0,0); break;
-    case 5: translate(-10,15,-1); rotateX(PI); text("D",0,25); break;
-  }
-}
-
-void resetCube(){
-  for(int side = 0; side < sides.length; side++){
-    for(int row = 0; row < sides[side].length; row++){
-      for(int col = 0; col < sides[side][row].length; col++){
-        sides[side][row][col] = colors[side];
-      }
-    }
-  }
-}
-
-void shuffleCube(){
-  shuffleStepsLeft = random(20,50);
-  shuffleTimer = shuffleStepsLeft * 5;
 }
