@@ -8,6 +8,8 @@ float prx = 0, pry = 0;
 float mx = 0, my = 0;
 int shuffleStepsLeft = 0;
 int shuffleTimer = 0;
+double elapsedTime = 0;
+long lastMilis = millis();
 
 int random(int a, int b){return (int)(Math.random()*(b-a+1)+a);}
 
@@ -25,7 +27,8 @@ void setup(){
 }
 //-----------------------------------------------------------------------------------------------
 void draw(){
-  
+  elapsedTime += millis() - lastMilis;
+  lastMilis = millis();
   if(shuffleStepsLeft > 0 && shuffleTimer % 5 == 0){
     shuffleStepsLeft--;
     switch(random(1,6)){
@@ -37,11 +40,16 @@ void draw(){
       case 6: rd();
     }
   }
+  background(0);
   if(shuffleTimer > 0) shuffleTimer--;
+  pushMatrix();
+  fill(255);
+  translate(width-200, 100, -100);
+  text(nf((int)(elapsedTime/100)/10.0, 1, 1), 0, 0);
+  popMatrix();
   
   pushMatrix();
   translate(width/2, height/2, -200);
-  background(0);
   
   if(mousePressed == true){
     rotationX = prx + (my-mouseY)/height * PI * 2;
@@ -161,6 +169,7 @@ void resetCube(){
 }
 
 void shuffleCube(){
+  elapsedTime = 0;
   shuffleStepsLeft = random(20,50);
   shuffleTimer = shuffleStepsLeft * 5;
 }
